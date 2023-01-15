@@ -92,7 +92,8 @@
   ];
 
   // objarray 에 { text: 'Four', value: 'D' } 를 추가하시오.
-  objarray.push({ text: 'Four', value: 'D' }); // objarray[objarray.length] = { text: 'Four', value: 'D' };
+  objarray.push({ text: 'Four', value: 'D' });
+  // objarray[objarray.length] = { text: 'Four', value: 'D' };
   console.log(objarray);
 
   // objarray 에서 filter 메서드를 사용하여 text의 값이 'One' 인 객체들을 찾고
@@ -115,6 +116,11 @@
     }
     return true;
   });
+  // objarray = objarray.filter((item, idx) => {
+  //   if (item.text !== "Three") {
+  //     return item
+  //   }
+  // })
   console.log(objarray);
 
   // objarray 에서 map 메서드를 사용하여 no 프로퍼티 추가하시오
@@ -129,6 +135,11 @@
 
     return value;
   });
+
+  // console.log(objarray.map((item, idx) => {
+  //   return { ...item, no: idx }
+  // }))
+
   console.log(objarray);
 
   // objarray 에서 reduce 메서드를 사용하여 각 요소의 value 프로퍼티 를 합쳐서 하나의 문자열로 만드시오
@@ -148,8 +159,15 @@
   }, '');
   console.log(str); // ABD
 
-
+  //간단하게 줄이면 아래와 같이 쓸 수 있다.
   const str2 = objarray.map((obj) => obj.value)
     .reduce((pvalue, cvalue) => pvalue + cvalue, '');
   console.log(str2); // ABD
+
+  // objarray 에서 filter 메서드를 사용하여 value가 "D" 인 요소만 들어 있는 배열을 만들고 출력하시오
+  console.log(objarray.filter((item, idx) => {
+    if (item.value === "D") {
+      return item
+    }
+  }))
 </script>
