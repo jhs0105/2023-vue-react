@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
     <title>Vue Sample</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
-</head>
+    <link rel="stylesheet"
+      href="../css/reset.css">
+  </head>
 
-<body>
+  <body>
     <br>
-    <img src="./singerarray.png" style="padding-left: 30px;">
+    <img src="./singerarray.png"
+      style="padding-left: 30px;">
     <xmp>
         v-for 지시자를 사용하여 자신이 좋아하는 가수들을 출력하는 테이블을 작성하여 본다.
 
@@ -47,28 +51,76 @@
     </xmp>
     <hr>
 
-    <div id="app" class="col-md-10 offset-md-1">
-        <table id="list" class="table-bordered">
-            <thead>
-                <tr class="bg-warning text-white text-center">
-                    <th>번호</th>
-                    <th>이름</th>
-                    <th>전화번호</th>
-                    <th>주소</th>
-                </tr>
-            </thead>
-            <tbody id="contacts">
-                <tr v-for="(contact, i) in contacts" v-bind:key="i">
-                    <td>{{i+1}}</td>
-                    <td>{{contact.name}}</td>
-                    <td>{{contact.tel}}</td>
-                    <td>{{contact.address}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div id="app"
+      class="col-md-10 offset-md-1">
+      <div>
+        <label for="">이름</label><input v-model:value="name"
+          placeholder="이름을 입력하세요">
+        <label for="">전화번호</label><input v-model:value="tel"
+          placeholder="전화번호를 입력하세요">
+        <label for="">주소</label><input v-model:value="address"
+          placeholder="주소를 입력하세요">
+        <button :disabled="address === '' || address === null"
+          v-on:click='btnAddClick'>추가</button>
+      </div>
+      <table id="list"
+        class="table-bordered">
+        <thead>
+          <tr class="bg-warning text-white text-center">
+            <th>번호</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>주소</th>
+          </tr>
+        </thead>
+        <tbody id="contacts">
+          <tr v-for="(contact, i) in contacts"
+            v-bind:key="i">
+            <td>{{i+1}}</td>
+            <td>{{contact.name}}</td>
+            <td>{{contact.tel}}</td>
+            <td>{{contact.address}}</td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
-</body>
+  </body>
 
 </html>
 
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.7.8/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+  new Vue({
+    /* edtmc^2w */
+    el: '#app',
+    data: {
+      /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+      contacts: [{ name: "설현", tel: "010-3456-8200", address: "서현" }, { name: "혜리", tel: "010-3456-1234", address: "서리" }],
+      name: null,
+      tel: null,
+      address: null,
+    },
+    //template: ``,
+    methods: {
+      /* 이벤트 핸들러 등록 + 일반 함수 */
 
+      btnAddClick(e) {
+        const obj = {
+          name: this.$data.name, tel: this.$data.tel, address: this.$data.tel
+        }
+
+        this.$data.contacts.push({ name: obj.name, tel: obj.tel, address: obj.address })
+
+        //입력값 초기화
+        this.$data.name = ""
+        this.$data.tel = ""
+        this.$data.address = ""
+      }
+    },
+
+  });
+
+
+</script>
