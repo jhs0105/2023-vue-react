@@ -124,7 +124,7 @@ input:focus {
 
 export default {
   /* pdtmc^2w */
-  props: [],
+  props: ['todoItems'],
   data() {
     /* 컴포넌트 안에서 사용되는 변수 등록. 개별 변수 */
     return {
@@ -135,8 +135,30 @@ export default {
   //template: ``,
   methods: {
     /* 이벤트 핸들러 등록 + 일반 함수 */
-    addTodo(e) {
-      console.log(e.target);
+    addTodo() {
+      if (this.$data.newTodoItem === null || this.$data.newTodoItem === '') {
+        return;
+      }
+      const ids = this.$props.todoItems.map((item) => {
+        return item.id;
+      });
+
+      const count = ids.reduce((pvalue, cvalue) => {
+        if (pvalue > cvalue) {
+          return pvalue;
+        } else {
+          return cvalue;
+        }
+      });
+
+      const newTodo = {
+        id: count + 1,
+        todo: this.$data.newTodoItem,
+        done: false,
+      };
+      this.$emit('addTodo', newTodo);
+      this.$data.newTodoItem = '';
+      console.log(newTodo);
     },
     /* vuex 를 사용하는 경우
       mapActions 는 store의 actions 를 가져오는 헬퍼 메서드입니다.
@@ -163,20 +185,6 @@ export default {
       2) store.모듈명.getters 이름 그대로 사용하기(추천방식)
          ...mapGetters('모듈명', ['게터명1', '게터명2']),
       */
-  },
-  watch: {
-    /* 자동처리 + 비동기식. data 에 등록된 프로퍼티(변수) 모니터링. 메서드로 작성. 매개변수 필수. 외부 api 호출을 위해서 사용 */
-  },
-  created() {
-    console.log('created');
-  },
-  mounted() {
-    console.log('mounted');
-    /* store의 actions 호출 */
-    // this.$store.dispatch('액션명', payload);
-  },
-  updated() {
-    console.log('updated');
   },
 };
 </script>

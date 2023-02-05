@@ -107,8 +107,9 @@
       /* 이벤트 핸들러 등록 + 일반 함수 */
 
       btnAddClick(e) {
+        //console.log(this.$data.name)
         const obj = {
-          name: this.$data.name, tel: this.$data.tel, address: this.$data.tel
+          name: this.$data.name, tel: this.$data.tel, address: this.$data.address
         }
 
         this.$data.contacts.push({ name: obj.name, tel: obj.tel, address: obj.address })

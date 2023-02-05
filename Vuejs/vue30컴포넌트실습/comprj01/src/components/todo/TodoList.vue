@@ -118,19 +118,5 @@ export default {
          ...mapGetters('모듈명', ['게터명1', '게터명2']),
       */
   },
-  watch: {
-    /* 자동처리 + 비동기식. data 에 등록된 프로퍼티(변수) 모니터링. 메서드로 작성. 매개변수 필수. 외부 api 호출을 위해서 사용 */
-  },
-  created() {
-    console.log('created');
-  },
-  mounted() {
-    console.log('mounted');
-    /* store의 actions 호출 */
-    // this.$store.dispatch('액션명', payload);
-  },
-  updated() {
-    console.log('updated');
-  },
 };
 </script>

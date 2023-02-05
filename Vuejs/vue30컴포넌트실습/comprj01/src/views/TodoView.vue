@@ -20,7 +20,10 @@ button {
     <!-- TodoHeader -->
     <TodoHeader></TodoHeader>
     <!-- TodoInput -->
-    <TodoInsert v-on:addTodo="addTodo"></TodoInsert>
+    <TodoInsert
+      v-on:addTodo="addTodo"
+      v-bind:todoItems="todoItems"
+    ></TodoInsert>
     <!-- TodoList -->
     <TodoList
       v-bind:todoItems="todoItems"
@@ -48,7 +51,7 @@ export default {
       todoItems: [
         { id: 1, todo: '밥먹기', done: false },
         { id: 2, todo: '주말 산책', done: true },
-        { id: 3, todo: 'ES6 학습', done: false },
+        { id: 3, todo: 'ES6 학습', done: true },
         { id: 4, todo: '잠실 야구장', done: false },
       ],
     };
@@ -60,7 +63,6 @@ export default {
       this.$data.todoItems = [];
     },
     addTodo(list) {
-      console.log('todo');
       this.$data.todoItems = [...this.$data.todoItems, list];
     },
     doneToggle(id) {
@@ -68,11 +70,20 @@ export default {
         if (item.id === id) {
           item.done = !item.done;
         }
+        return item;
       });
       this.$data.todoItems = newTodos;
     },
-    removeTodo(e) {
-      console.log(e.target);
+    removeTodo(id) {
+      const newTodos = this.$data.todoItems.filter((item) => {
+        // if (item.id === id) {
+        //   return false;
+        // } else {
+        //   return true;
+        // }
+        return item.id !== id;
+      });
+      this.$data.todoItems = newTodos;
     },
     /* vuex 를 사용하는 경우
       mapActions 는 store의 actions 를 가져오는 헬퍼 메서드입니다.
