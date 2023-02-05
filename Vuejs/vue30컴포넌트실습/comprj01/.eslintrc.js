@@ -2,7 +2,6 @@ module.exports = {
   root: true,
   env: {
     node: true,
-
     browser: true,
     commonjs: true,
     es6: true,
@@ -21,7 +20,6 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'linebreak-style': 'off',
     'arrow-parens': ['error', 'always'],
