@@ -20,10 +20,7 @@ button {
     <!-- TodoHeader -->
     <TodoHeader></TodoHeader>
     <!-- TodoInput -->
-    <TodoInsert
-      v-on:addTodo="addTodo"
-      v-bind:todoItems="todoItems"
-    ></TodoInsert>
+    <TodoInsert v-on:addTodo="addTodo"></TodoInsert>
     <!-- TodoList -->
     <TodoList
       v-bind:todoItems="todoItems"
@@ -51,7 +48,7 @@ export default {
       todoItems: [
         { id: 1, todo: '밥먹기', done: false },
         { id: 2, todo: '주말 산책', done: true },
-        { id: 3, todo: 'ES6 학습', done: true },
+        { id: 3, todo: 'ES6 학습', done: false },
         { id: 4, todo: '잠실 야구장', done: false },
       ],
     };
@@ -62,16 +59,37 @@ export default {
     clearAll() {
       this.$data.todoItems = [];
     },
-    addTodo(list) {
-      this.$data.todoItems = [...this.$data.todoItems, list];
+    addTodo(newTodoItem) {
+      console.log(newTodoItem);
+
+      const ids = this.$data.todoItems.map((item) => {
+        return item.id;
+      });
+
+      const maxid = ids.reduce((pvalue, cvalue) => {
+        // max(0,1)
+        // max(1,2) //Math.max를 써도 되지만 아래와 같이 연습...
+        if (pvalue > cvalue) {
+          return pvalue;
+        }
+        return cvalue;
+      }, 0);
+      const newid = maxid + 1;
+      const newTodo = { id: newid, todo: newTodoItem, done: false };
+      //this.$data.todoItems.push(newTodo); 이렇게 써도 되고 아래와 같이 써도 좋다!
+      this.$data.todoItems = [...this.$data.todoItems, newTodo];
     },
     doneToggle(id) {
+      //debugger;
+      //배열 복제
       const newTodos = this.$data.todoItems.map((item) => {
+        //debugger;
         if (item.id === id) {
           item.done = !item.done;
         }
         return item;
       });
+      //할당
       this.$data.todoItems = newTodos;
     },
     removeTodo(id) {
@@ -84,6 +102,8 @@ export default {
         return item.id !== id;
       });
       this.$data.todoItems = newTodos;
+
+      //클릭 이벤트 버블링 막기=>이벤트 취소 (자식에서 막아야 한다)
     },
     /* vuex 를 사용하는 경우
       mapActions 는 store의 actions 를 가져오는 헬퍼 메서드입니다.

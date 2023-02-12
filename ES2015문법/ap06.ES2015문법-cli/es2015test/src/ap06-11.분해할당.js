@@ -38,4 +38,31 @@ console.log(type1, color1, model1);
 
 //객체분해 할당을 이용해서 type, color, model을 만드시오
 const { type, color, model, gear } = car;
-console.log(type, color, model, gear); //값이 없으면 undefined가 들어간다.
+console.log(type, color, model, gear); //값이 없으면 undefined가 들어간다. // t, S, 2017, undefined
+
+const { type: type2, color: color2, model: model2, gear: gear2 } = car;
+
+const func1 = ({ type, color }) => {
+  console.log(type);
+  console.log(color);
+};
+func1(car); // car={type: "t", color:"s", model:2017}
+
+const func2 = (car) => {
+  const { type, color } = car;
+  console.log(type);
+  console.log(color);
+};
+func2(car);
+
+function func3(...args) {
+  const [first, ...others] = args;
+  console.log('func3', first);
+  console.log('func3', others);
+  console.log('func3', others[2]);
+}
+func3(1, 2, 3, 4, 0);
+//...others에서 ...는 rest연산자, other는 배열 (spread연산자가 아니다!)
+
+const abc = [1, 2, 3, 4];
+console.log(...abc);//spread 연산자 개별 요소로 분리

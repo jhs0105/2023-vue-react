@@ -124,7 +124,7 @@ input:focus {
 
 export default {
   /* pdtmc^2w */
-  props: ['todoItems'],
+  props: [],
   data() {
     /* 컴포넌트 안에서 사용되는 변수 등록. 개별 변수 */
     return {
@@ -136,29 +136,10 @@ export default {
   methods: {
     /* 이벤트 핸들러 등록 + 일반 함수 */
     addTodo() {
-      if (this.$data.newTodoItem === null || this.$data.newTodoItem === '') {
-        return;
+      if (this.$data.newTodoItem && this.$data.newTodoItem.trim() != '') {
+        this.$emit('addTodo', this.$data.newTodoItem);
       }
-      const ids = this.$props.todoItems.map((item) => {
-        return item.id;
-      });
-
-      const count = ids.reduce((pvalue, cvalue) => {
-        if (pvalue > cvalue) {
-          return pvalue;
-        } else {
-          return cvalue;
-        }
-      });
-
-      const newTodo = {
-        id: count + 1,
-        todo: this.$data.newTodoItem,
-        done: false,
-      };
-      this.$emit('addTodo', newTodo);
       this.$data.newTodoItem = '';
-      console.log(newTodo);
     },
     /* vuex 를 사용하는 경우
       mapActions 는 store의 actions 를 가져오는 헬퍼 메서드입니다.

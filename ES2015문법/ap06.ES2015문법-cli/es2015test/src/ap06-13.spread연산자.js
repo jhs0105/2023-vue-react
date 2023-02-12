@@ -36,3 +36,38 @@ const countries = east.concat(west); //옛날에 사용했던 방법.
 const countries1 = [...east, ...west];
 console.log(countries1); //배열
 console.log(...countries1); //객체
+
+const car1 = {
+  type: 't1',
+  color: 'S1',
+  model: 2017,
+};
+const car2 = {
+  type: 't2',
+  color: 'S2',
+  model: 2019,
+};
+
+const { type } = car1;
+console.log(type);
+
+const func = ({ type }) => {
+  console.log(type);
+};
+func({ ...car1, ...car2 }); //car1을 car2가 먹게된다. 그에 실질적으로 들어가는 값은 car2
+
+const morning = { breakfast: '미역국', lunch: '햄버거' };
+const dinner = '스테이크';
+
+const meals = {
+  ...morning,
+  dinner,
+};
+console.log(meals);
+
+function childComponent(...props) {
+  console.log(props);
+}
+
+const message = 'passed from Parent Component';
+childComponent(...message);

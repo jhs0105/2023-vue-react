@@ -55,7 +55,7 @@ li.checked {
         <span
           class="removeBtn"
           type="button"
-          v-on:click="removeTodo(todoItem.id)"
+          v-on:click.stop="removeTodo(todoItem.id)"
         >
           <i class="far fa-trash-alt" aria-hidden="true"></i>
         </span>
@@ -86,10 +86,14 @@ export default {
       }
     },
     doneToggle(id) {
+      //debugger;
       this.$emit('doneToggle', id);
     },
     removeTodo(id) {
       this.$emit('removeTodo', id);
+      //click 이벤트 취소
+      // window.event.stopPropagation();
+      // window.event.preventDefault();
     },
 
     /* vuex 를 사용하는 경우

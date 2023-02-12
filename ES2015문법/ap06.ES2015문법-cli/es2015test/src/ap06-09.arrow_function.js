@@ -19,3 +19,17 @@
             iterator를 생성해서 next()로 순회할 수 있는 자료구조가 이터러블
 
 */
+
+const func1 = function (a, b) {
+  return a + b;
+};
+
+const func2 = (a, b) => {
+  return a + b;
+};
+
+const func3 = (a, b) => a + b;
+
+console.log(func1(3, 4));
+console.log(func2(3, 4));
+console.log(func3(3, 4));
