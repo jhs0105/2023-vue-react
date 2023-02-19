@@ -166,7 +166,7 @@
     // useState 를 사용한 컴포넌트의 상태값 설정
     const [age, setAge] = useState(42); // 상태값이 기본타입인 경우
     const [fruit, setFruit] = useState('banana'); // 상태값이 기본타입인 경우
-    const [todos, setTodos] = useState({ text: 'Learn Hooks' }); // 상태값이 기본타입인 경우
+    const [todos, setTodos] = useState([{ text: 'Learn Hooks' }, { text: "Review Vue" }]); // 상태값이 기본타입인 경우
 
     // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
     const callback = useCallback((param) => {
@@ -191,7 +191,7 @@
         </div>
         <p> age: {age}</p>
         <p> fruit: {fruit}</p>
-        <p> {todos.text}</p>
+        <p> {todos.map((item) => { return (<li>{item.text}</li>) })}</p>
       </div>
     )
   }
